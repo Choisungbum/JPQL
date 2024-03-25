@@ -39,6 +39,20 @@ public class JpaMain {
             em.flush();
             em.clear();
 
+            // 단일값 연관경로
+//            String query = "select m.team from Member m";
+//            List<Team> result = em.createQuery(query, Team.class)
+//                    .getResultList();
+
+            // 컬렉션값 연관 경로
+            String query = "select m.members from Team m";
+            List<Member> result = em.createQuery(query, Member.class)
+                    .getResultList();
+
+            for (Member s : result) {
+                System.out.println("s = " + s);
+            }
+
             // CASE 식
 //            String query = "select "
 //                    + "case when m.age <= 10 then '학생요금' "
@@ -52,14 +66,14 @@ public class JpaMain {
 
             // NULLIF: 두 값이 같으면 null 반환, 다르면 첫번째 값 반환
 //            String query = "select nullif(m.username, '관리자') from Member m ";
-            //JPQL 기본함수
-            String query = "select concat('a', 'b') from Member m";
-            List<String> result = em.createQuery(query, String.class)
-                    .getResultList();
-
-            for (String s : result) {
-                System.out.println("s = " + s);
-            }
+//            //JPQL 기본함수
+//            String query = "select concat('a', 'b') from Member m";
+//            List<String> result = em.createQuery(query, String.class)
+//                    .getResultList();
+//
+//            for (String s : result) {
+//                System.out.println("s = " + s);
+//            }
 
             // JPQL 타입표현
 //            String query = "select m.username, 'HELLO', TRUE from Member m "
